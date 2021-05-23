@@ -26,7 +26,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Temporizador temporizadorNuevoEnemigo = new Temporizador(120);
 	ScoreBoard scoreboard;
 	boolean gameover;
-	Music[] music = new Music[4];
+	Music[] music = new Music[5];
 	float volumen = 0.2f;
 
 	@Override
@@ -133,6 +133,9 @@ public class MyGdxGame extends ApplicationAdapter {
 			int result = scoreboard.update(jugador.puntos);
 			if(result == 1) {
 				inicializarJuego();
+				music[0] = Gdx.audio.newMusic(Gdx.files.getFileHandle("start_game.mp3", Files.FileType.Internal));
+				music[0].setVolume(volumen);
+				music[0].play();
 			} else if (result == 2) {
 				Gdx.app.exit();
 			}
@@ -157,6 +160,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		if (gameover){
 			scoreboard.render(batch, font);
+			music[4] = Gdx.audio.newMusic(Gdx.files.getFileHandle("game_over.mp3", Files.FileType.Internal));
+			music[4].setVolume(volumen);
+			music[4].play();
 		}
 		batch.end();
 	}

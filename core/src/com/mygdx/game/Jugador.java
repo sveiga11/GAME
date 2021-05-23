@@ -35,8 +35,7 @@ public class Jugador {
     boolean muerto = false;
     Temporizador temporizadorFireRate = new Temporizador(20);
     Temporizador temporizadorRespawn = new Temporizador(120, false);
-    Music[] music = new Music[2];
-    float volumen = 0.2f;
+
 
     Jugador() {
         x = 100;
@@ -76,9 +75,6 @@ public class Jugador {
 
         if (vidas == 0){
             batch.draw(animacion_gameover.obtenerFrame(), x, y, w, h);
-            music[0] = Gdx.audio.newMusic(Gdx.files.getFileHandle("game_over.wav", Files.FileType.Internal));
-            music[0].setVolume(volumen);
-            music[0].play();
         } else if (muerto){
             batch.draw(animacion_jugadorherido.obtenerFrame(), x, y, w, h);
         } else {
