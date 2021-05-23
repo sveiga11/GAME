@@ -26,8 +26,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	Temporizador temporizadorNuevoEnemigo = new Temporizador(120);
 	ScoreBoard scoreboard;
 	boolean gameover;
-	Music[] music = new Music[3];
-	float volumen = 0.5f;
+	Music[] music = new Music[4];
+	float volumen = 0.2f;
 
 	@Override
 	public void create() {
@@ -86,15 +86,16 @@ public class MyGdxGame extends ApplicationAdapter {
 				jugador.morir();
 				if (jugador.vidas == 0){
 					gameover = true;
+
 				}
+				music[3] = Gdx.audio.newMusic(Gdx.files.getFileHandle("jugador_herido.mp3", Files.FileType.Internal));
+				music[3].setVolume(volumen);
+				music[3].play();
 			}
 
 			if (jugador.puntos >= 10){
 				temporizadorNuevoEnemigo.frecuencia = 57;
 				enemigo.animacion.duracion = 12;
-				music[2] = Gdx.audio.newMusic(Gdx.files.getFileHandle("10.mp3", Files.FileType.Internal));
-				music[2].setVolume(volumen);
-				music[2].play();
 			}
 			if (jugador.puntos >= 20){
 				temporizadorNuevoEnemigo.frecuencia = 47;
@@ -111,6 +112,9 @@ public class MyGdxGame extends ApplicationAdapter {
 			if (jugador.puntos >= 50){
 				temporizadorNuevoEnemigo.frecuencia = 17;
 				enemigo.animacion.duracion = 1;
+				music[2] = Gdx.audio.newMusic(Gdx.files.getFileHandle("10.mp3", Files.FileType.Internal));
+				music[2].setVolume(volumen);
+				music[2].play();
 			}
 
 			if (enemigo.x < -enemigo.w) enemigosAEliminar.add(enemigo);
@@ -132,6 +136,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			} else if (result == 2) {
 				Gdx.app.exit();
 			}
+
 		}
 	}
 

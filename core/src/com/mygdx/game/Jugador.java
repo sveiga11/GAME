@@ -4,7 +4,7 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -35,7 +35,7 @@ public class Jugador {
     boolean muerto = false;
     Temporizador temporizadorFireRate = new Temporizador(20);
     Temporizador temporizadorRespawn = new Temporizador(120, false);
-    Sound[] sound = new Sound[2];
+    Music[] music = new Music[2];
     float volumen = 0.2f;
 
     Jugador() {
@@ -76,14 +76,11 @@ public class Jugador {
 
         if (vidas == 0){
             batch.draw(animacion_gameover.obtenerFrame(), x, y, w, h);
-            sound[0] = Gdx.audio.newSound(Gdx.files.getFileHandle("game_over.mp3", Files.FileType.Internal));
-            sound[0].setVolume(1 , volumen);
-            sound[0].play();
+            music[0] = Gdx.audio.newMusic(Gdx.files.getFileHandle("game_over.wav", Files.FileType.Internal));
+            music[0].setVolume(volumen);
+            music[0].play();
         } else if (muerto){
             batch.draw(animacion_jugadorherido.obtenerFrame(), x, y, w, h);
-            sound[1] = Gdx.audio.newSound(Gdx.files.getFileHandle("jugador_herido.mp3", Files.FileType.Internal));
-            sound[1].setVolume(1, volumen);
-            sound[1].play();
         } else {
             batch.draw(animacion.obtenerFrame(), x, y, w, h);
         }
